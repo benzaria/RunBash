@@ -1,0 +1,29 @@
+RunBash RCDATA "RunBash.bat"
+BASH ICON "bash.ico"
+ROOT ICON "root.ico"
+1 24 "RunBash.manifest"
+1 VERSIONINFO
+FILEVERSION 1,0,0,0
+PRODUCTVERSION 1,0,0,0
+FILEOS 0x4
+FILETYPE 0x1
+{
+BLOCK "StringFileInfo"
+{
+    BLOCK "040904B0"
+    {
+        VALUE "CompanyName", "benzaria"
+        VALUE "FileDescription", "Run Bash Scripts and Binarys Directly from Windows"
+        VALUE "FileVersion", "1.0"
+        VALUE "InternalName", "RunBash.exe"
+        VALUE "LegalCopyright", "\xA9 benzaria"
+        VALUE "OriginalFilename", "RunBash.exe"
+        VALUE "ProductName", "RunBash"
+        VALUE "ProductVersion", "1.0"
+    }
+}
+BLOCK "VarFileInfo"
+{
+    VALUE "Translation", 0x0409, 1200 
+}
+}
