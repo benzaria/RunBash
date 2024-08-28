@@ -1,5 +1,5 @@
 @echo off
-copy %ProgramData%\RunBash\RunBash.bat %ProgramData%\RunBash\RunBash.bak >nul 2>&1
+copy %ProgramData%\RunBash\RunBash.bat %ProgramData%\RunBash\RunBash.old >nul 2>&1
 del  %ProgramData%\RunBash\RunBash.bat 2>nul
 %~dp0RunBash -Install 
 %~dp0RunBash -GetBin 

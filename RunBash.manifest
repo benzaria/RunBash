@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-    <assemblyIdentity version="1.3.0.0" name="RunBash.app"/>
+    <assemblyIdentity version="1.1.0.0" name="RunBash" processorArchitecture="x86"/>
     
-    <description>Run Bash Scripts Directly from Windows</description>
+    <description>Run Bash Scripts and Binarys Directly from Windows</description>
     
     <!-- Request administrator privileges -->
     <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
