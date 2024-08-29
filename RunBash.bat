@@ -4,17 +4,20 @@ chcp 65001 >nul
 
 ::╔═══════════════════════════════════════════════════════════════════════╗::
 ::║                        RunBash MadeBy Benzaria                        ║::
-::║          Run Bash Scripts and Binarys Directly from Windows           ║::
+::║          Run Bash Scripts and Binaries Directly from Windows          ║::
 ::║                Via Windows Explorer And Command Prompt                ║::
 ::╚═══════════════════════════════════════════════════════════════════════╝::
-::  ver 1.1 >> for more info check https://github.com/benzaria/RunBash     ::
+::  ver 1.3 >> for more info check https://github.com/benzaria/RunBash     ::
 
 :: Default Parameters
 set "Std=3"   & rem Display Standard Output And Error
 set "Exit=3"  & rem Display ExitCode And Success Msg
 set "NoWait=" & rem Wait For The Execution
 
-if /i "%~x1" equ ".exe" set /a n = 1 && shift /0
+if /i "%~x1" equ ".exe" (
+    set /a n = 1
+    shift /0
+)
 
 :: Capturing Arguments
 if "%~1" equ "" ( 
@@ -22,8 +25,8 @@ if "%~1" equ "" (
    echo   ^>^> for more info : [93m%~n0 [0m-help
    exit /b 1
 ) else (
-    if /i "%~1" equ "-Help" goto :Help
-    if /i "%~1" equ "-Install" goto :Install
+    if /i "%~1" equ "-Help" goto :_Help_
+    if /i "%~1" equ "-Install" goto :_Install_
     set "arg_=" && set "arg=%*" && set "arg=!arg:;=¬!"
     for %%i in (!arg!) do (
         if !n! leq 0 (
@@ -72,10 +75,10 @@ if !Exit! neq 0 (
     :: remove '[1A' to make a new line after the exit msg
     if !ErrorLevel! neq 0 (
         if !Exit! neq 2 (
-            echo [31mScript Exited With ErrorCode=[94m!ErrorLevel![0m[1A
+            echo [31mExited With ErrorCode=[94m!ErrorLevel![0m[1A
         ) 
     ) else if !Exit! neq 1 (
-        echo [92mScript Exited With No Errors.[0m[1A 
+        echo [92mExited With No Errors.[0m[1A 
     )
 )
 
@@ -104,19 +107,19 @@ EXIT /B %ErrorLevel%
     :-AddBin
     :-RemBin
         set "bin_dir=%ProgramData%\RunBash\Linux-Binary\"
-        set "Bin=!arg:-=!"
+        set "Bin=_!arg:-=!_"
         exit /b 0
 :: End Select
 
-:EnvVar
+:_EnvVar_
     :: Adding The Directory To The PATH EnvVar
-    echo %PATH% | find /i "%~dp1" >nul || PowerShell -NoProfile -Command "Start-Process -Wait -WindowStyle Hidden -Verb RunAs PowerShell -ArgumentList '-NoProfile', '-Command', \"[System.Environment]::SetEnvironmentVariable('Path', [System.Environment]::GetEnvironmentVariable('Path', [System.EnvironmentVariableTarget]::Machine) + ';%~dp1', [System.EnvironmentVariableTarget]::Machine)\"" 2>nul || echo [91mError: Elevated Privileges not Granted.[0m && exit /b 1
+    echo %PATH% | find /i "%~dp1" >nul || PowerShell -NoProfile -Command "Start-Process -Wait -WindowStyle Hidden -Verb RunAs PowerShell -ArgumentList '-NoProfile', '-Command', \"[System.Environment]::SetEnvironmentVariable('Path', [System.Environment]::GetEnvironmentVariable('Path', [System.EnvironmentVariableTarget]::Machine) + ';%~dp1', [System.EnvironmentVariableTarget]::Machine)\"" 2>nul && echo [93mMake sure to restart Cmd After finishing[0m || echo [91mError: Elevated Privileges not Granted.[0m && exit /b 1
     if "%~2" neq "" echo %PATHEXT% | find /i "%~2" >nul || PowerShell -NoProfile -Command "Start-Process -Wait -WindowStyle Hidden -Verb RunAs PowerShell -ArgumentList '-NoProfile', '-Command', \"[System.Environment]::SetEnvironmentVariable('PATHEXT', [System.Environment]::GetEnvironmentVariable('PATHEXT', [System.EnvironmentVariableTarget]::Machine) + ';%~2', [System.EnvironmentVariableTarget]::Machine)\"" 2>nul || exit /b 1
     exit /b 0
 
-:GetBin
+:_GetBin_
     mkdir "!bin_dir!" 2>nul
-    call :EnvVar !bin_dir! || exit /b 1
+    call :_EnvVar_ !bin_dir! || exit /b 1
     :: Collecting All Possible Executable Files 
     for /f "delims=" %%i in (' wsl find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin /home !arg! -type l -o -type f -executable -o \^( -type f \^( -name "*.sh" -o -name "*.bash" -o -name "*.py" \^) \^) -o -path /mnt/c -prune ') do (
         :: Filtering NON Executable Files
@@ -131,11 +134,9 @@ EXIT /B %ErrorLevel%
         )
     )
     echo [K[94m!n! Links Has Been Added.[0m
-    start cmd /k set "PATH=%PATH%;!bin_dir!"
-    exit /b 0
+    wt -w 0 2>nul & exit /b 0
 
-:AddBin
-    call :EnvVar !bin_dir!
+:_AddBin_
     for /f "tokens=1* delims=¬" %%i in ("!arg!") do (
         for /f "tokens=1*" %%a in ("%%~i") do (
             echo %%~a -^> %%~b
@@ -144,13 +145,13 @@ EXIT /B %ErrorLevel%
         )
         set "arg=%%j"
     )
-    if defined arg goto :AddBin
+    if defined arg goto :_AddBin_
     exit /b 0
 
-:RemBin
+:_RemBin_
     if not defined arg (
-        choice /n /m "Are You Sure, Delete All Links (yes|no)"
-        if !errorlevel! equ 1 (
+        choice /n /m "[91mAre You Sure, Delete All Links [93m(yes|no)[0m"
+        if !ErrorLevel! equ 1 (
             del /q "!bin_dir!"
             echo [91mAll Links has been Deleted.[0m
         )
@@ -158,20 +159,29 @@ EXIT /B %ErrorLevel%
     for %%i in (!arg!) do del "!bin_dir!%%~i.*"
     exit /b 0
 
-:Install
+:_Install_
     net session >nul 2>&1
     if !ErrorLevel! neq 0 (
         PowerShell -NoProfile -Command "Start-Process -Wait -WindowStyle Hidden -Verb RunAs \"%~0\" -ArgumentList '-Install \"%~2\" \"%~3\"'" 2>nul || echo [91mError: Elevated Privileges not Granted.[0m
         exit /b 1
     )
-    
+
+    if not exist "%temp%\msgbox" (
+        mshta vbscript:Execute^("if msgbox(""Overwrite RunBash.bat if Existed ?"", vbYesNo + vbQuestion + vbSystemModal,""RunBash Installer"") = vbyes then CreateObject(""Scripting.FileSystemObject"").CreateTextFile ""%temp%\msgbox"", true end if"^)^(window.close^) 
+        if exist "%temp%\msgbox" (
+            move /y "%ProgramData%\RunBash\RunBash.bat" "%ProgramData%\RunBash\RunBash.old" >nul 2>&1
+            start /b /wait "" "%~f0" -Install "%~2" "%~3"
+            exit /b 0
+        )
+    ) else del "%temp%\msgbox"
+
     set "istl_dir=%windir%\RunBash.exe"
     set "edit_dir=%windir%\notepad.exe"
     if "%~2" neq "" if "%~2" neq " " set "istl_dir=%~2"
     if "%~3" neq "" set "edit_dir=%~3"
 
     copy /y "%~0" "!istl_dir!" || mshta vbscript:msgbox("Error: Installing Failed, Install Path is Incorrect!",vbExclamation,"RunBash Installer")(window.close) && exit /b 1
-    call :EnvVar !istl_dir! ".SH"
+    call :_EnvVar_ !istl_dir! ".SH"
 
     reg add "HKEY_CLASSES_ROOT\bashfile" /ve /d "Linux Bash File" /f 
     reg add "HKEY_CLASSES_ROOT\bashfile\DefaultIcon" /ve /d "!istl_dir!,0" /f 
@@ -200,20 +210,20 @@ EXIT /B %ErrorLevel%
     reg add "HKEY_CLASSES_ROOT\.sh\ShellNew" /v NullFile /d "" /f 
 
     if !ErrorLevel! equ 0 ( 
-        mshta vbscript:msgbox("Registry entries have been added successfully.",vbinformation,"RunBash Installer")(window.close)
+        mshta vbscript:msgbox^("Registry entries have been added successfully.",vbInformation,"RunBash Installer"^)^(window.close^)
         taskkill /f /im explorer.exe
         start explorer.exe
-    ) else mshta vbscript:msgbox("Error: Registry entries haven't been added.",vbcritical,"RunBash Installer")(window.close)
+    ) else mshta vbscript:msgbox^("Error: Registry entries haven't been added.",vbCritical,"RunBash Installer"^)^(window.close^)
     exit /b 0
 
-:Help
+:_Help_
     echo [95m
     echo  ╔═══════════════════════════════════════════════════════════════════════╗
     echo  ║                        RunBash MadeBy Benzaria                        ║
-    echo  ║          Run Bash Scripts and Binarys Directly from Windows           ║
+    echo  ║          Run Bash Scripts and Binaries Directly from Windows          ║
     echo  ║                Via Windows Explorer And Command Prompt                ║
     echo  ╚═══════════════════════════════════════════════════════════════════════╝[94m
-    echo    ver 1.1 [0m^>^> for more info check [4;90mhttps://github.com/benzaria/RunBash[0m
+    echo    ver 1.3 [0m^>^> for more info check [4;90mhttps://github.com/benzaria/RunBash[0m
     echo [93m
     echo    %~n0 [0m[Wsl-Arguments] [RunBash-Arguments] [94m^<File-Path^>[0m [File-Arguments]
     echo or[94m
@@ -237,7 +247,7 @@ EXIT /B %ErrorLevel%
     echo [94m
     echo    -Install [96m^<install-path^> ^<editor-path^>[0m
     echo                   Install ContextMenu and RunBash Plugins to Explorer and Cmd
-    echo                   to skip the install-path type `[90m -Install [91m" " "[96meditor-path[91m" [0m`
+    echo                   To skip the install-path type `[90m -Install [91m" " "[96meditor-path[91m" [0m`
     echo                   (default :[90m "%windir%\notepad.exe" "%windir%\%~nx0"[0m)
     echo [94m
     echo    -NoWait [0m       Don't Wait For The Execution to Finish

@@ -3,8 +3,8 @@ BASH ICON "bash.ico"
 ROOT ICON "root.ico"
 1 24 "RunBash.manifest"
 1 VERSIONINFO
-FILEVERSION 1,1,0,0
-PRODUCTVERSION 1,1,0,0
+FILEVERSION 1,3,0,0
+PRODUCTVERSION 1,3,0,0
 FILEOS 0x4
 FILETYPE 0x1
 {
@@ -13,13 +13,13 @@ BLOCK "StringFileInfo"
     BLOCK "040904B0"
     {
         VALUE "CompanyName", "benzaria"
-        VALUE "FileDescription", "Run Bash Scripts and Binarys Directly from Windows"
-        VALUE "FileVersion", "1.1"
+        VALUE "FileDescription", "Run Bash Scripts and Binaries Directly from Windows"
+        VALUE "FileVersion", "1.3"
         VALUE "InternalName", "RunBash.exe"
         VALUE "LegalCopyright", "\xA9 benzaria"
         VALUE "OriginalFilename", "RunBash.exe"
         VALUE "ProductName", "RunBash 32-bit"
-        VALUE "ProductVersion", "1.1"
+        VALUE "ProductVersion", "1.3"
     }
 }
 BLOCK "VarFileInfo"

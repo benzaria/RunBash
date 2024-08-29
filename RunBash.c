@@ -4,10 +4,10 @@
 
 //╔═══════════════════════════════════════════════════════════════════════╗//
 //║                        RunBash MadeBy Benzaria                        ║//
-//║          Run Bash Scripts and binarys Directly from Windows           ║//
+//║          Run Bash Scripts and Binaries Directly from Windows          ║//
 //║                Via Windows Explorer And Command Prompt                ║//
 //╚═══════════════════════════════════════════════════════════════════════╝//
-//  ver 1.1 >> for more info check https://github.com/benzaria/RunBash     //
+//  ver 1.3 >> for more info check https://github.com/benzaria/RunBash     //
 
 // Check if a file exists
 int file_exists(const char *path) {
