@@ -33,10 +33,10 @@ or
 ### Usage
 RunBash can be invoked directly from the Command Prompt. Here are the basic usage instructions:
 
-First run `setup.bat` it will do all the work to make sure RunBash setup perfectly.  
- else run `RunBash -Install & RunBash -GetBin` !Basic setup!
+First run `setup.bat` it will do all the work to make sure RunBash is setup perfectly.  
+\- else run `RunBash -Install & RunBash -GetBin` for Basic setup !  
 
-```bash
+```
 Usage:
  RunBash [Wsl-Arguments] [RunBash-Arguments] <File-Path> [File-Arguments]  
 or after setting up 
@@ -44,8 +44,10 @@ or after setting up
 ```
 
 #### Example:
-```bash
-RunBash -Std 1 -Exit 1 -Root C:\Users\benz\sleepsort.sh
+```
+ RunBash -Std 1 -Exit 1 -Root C:\Users\benz\sleepsort.sh
+or after setting up
+ C:\Users\benz\sleepsort.sh -Std 1 -Exit 1 -Root
 ```
 
 ### Arguments
