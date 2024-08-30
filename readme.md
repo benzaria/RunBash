@@ -17,9 +17,12 @@
 - **Direct Seamless Execution:** Run Bash scripts and Linux binarys from Windows Explorer or the Command Prompt with ease.
 - **Linux Command Integration:** Easily link and manage Linux commands within your Windows environment.
 - **Context Menu Plugins:** Add Multiple Option to the context menu from: Open, Run as Root, Run as Admin, Edit, and New Bash File. [Details](#details)
+- **Customizable SourceCode:** add Any code you want to the main batchfile (\ProgramData\RunBash\RunBash.bat) to adjust the execution into your needs.  
 - **Customizable Execution:** Use various parameters to control output, error handling, and execution behavior.
 - **Root/Admin Access:** Optionally run scripts with Root or Admin privileges.
 - **Error and Output Handling:** Fine-tune what outputs and errors are displayed or hidden.
+> [!NOTE]
+> The Batchfile Can Not Run on it's Own it needs the main exe ahead of it   
 
 ## Getting Started
 ### Prerequisites
