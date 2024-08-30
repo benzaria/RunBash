@@ -134,7 +134,7 @@ EXIT /B %ErrorLevel%
         )
     )
     echo [K[94m!n! Links Has Been Added.[0m
-    wt -w 0 2>nul & exit /b 0
+    exit /b 0
 
 :_AddBin_
     for /f "tokens=1* delims=¬" %%i in ("!arg!") do (
@@ -243,12 +243,12 @@ EXIT /B %ErrorLevel%
     echo [94m
     echo    -AddBin [96m^<name-1^> [95m^<cmd-para-1^> [91m; [96m^<name-2^> [95m^<cmd-para-2^> [91m; [0m...
     echo                   Add Custom Commands with parameters from Linux To Windows
-    echo                   ([93m%~n0[90m -AddBin [96mll [95mls --color=auto -l [91m; [96mla [95mls -a [0m)
+    echo                   ([93m%~n0[90m -AddBin [96mll [95mls --color=auto -l [91m; [96mla [95mls -a [91m; [0m...)
     echo [94m
     echo    -Install [96m^<install-path^> ^<editor-path^>[0m
     echo                   Install ContextMenu and RunBash Plugins to Explorer and Cmd
     echo                   To skip the install-path type `[90m -Install [91m" " "[96meditor-path[91m" [0m`
-    echo                   (default :[90m "%windir%\notepad.exe" "%windir%\%~nx0"[0m)
+    echo                   (default :[90m "%windir%\notepad.exe" "%windir%\RunBash.exe"[0m)
     echo [94m
     echo    -NoWait [0m       Don't Wait For The Execution to Finish
     echo [94m
