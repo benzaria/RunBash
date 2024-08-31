@@ -7,3 +7,4 @@ for /f %%i in (' dir /b RunBash*.exe ') do set "RunBash=%%~fi"
 "%RunBash%" -AddBin grep grep --color=auto ; fgrep fgrep --color=auto ; egrep egrep --color=auto ; ip ip --color=auto ; diff diff --color=auto
 "%RunBash%" -Help
 set "PATH=%PATH%;%ProgramData%\RunBash\Linux-Binary\"
+echo [92mNo Need To Restart Cmd, Enjoy [93m:^)[0m
