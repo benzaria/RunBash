@@ -85,6 +85,9 @@ For a detailed guide on using RunBash, run: `RunBash -Help`
 
 ![RunBash in Action](/images/RunBash%20in%20Action%20(3).png)
 
+## LICENSE
+RunBash is licensed under the [MIT License](/LICENSE)
+
 ## Contribution
 Feel free to contribute by submitting issues or pull requests. Any enhancements or bug fixes are welcome!
 
