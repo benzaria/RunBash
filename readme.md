@@ -2,7 +2,9 @@
 ![](https://img.shields.io/badge/Windows-blue) ![](https://img.shields.io/badge/Linux-white?logo=linux&logoColor=black) ![](https://img.shields.io/badge/Batch-blue) ![](https://img.shields.io/badge/Bash-white?logo=gnubash&logoColor=black) ![](https://img.shields.io/badge/-blue?logo=c&logoColor=white) ![](https://img.shields.io/github/repo-size/benzaria/runbash) <!--[](https://img.shields.io/github/downloads/benzaria/runbash/total)--> ![](https://img.shields.io/badge/RunBash_size-300KB-green) <!--![](https://img.shields.io/github/size/benzaria/runbash/RunBash.exe) ![]() ![]() -->
 
 ## Overview
-**RunBash** is a handful utility that enables you to run your Bash Scripts and Linux Binarys directly from your Windows system, seamlessly integrating Linux commands into your Windows environment. Whether through Windows Explorer or the Command Prompt, RunBash offers a versatile and efficient way to execute Bash scripts and Binarys without the need for a separate terminal.
+<img src="https://raw.githubusercontent.com/benzaria/RunBash/main/images/bash.ico" width="110px" align="left" style="margin-top: -5px">
+
+**RunBash** is a handful utility that enables you to run your Bash Scripts and Linux Binarys directly from your Windows system, seamlessly integrating Linux commands into your Windows environment. Whether through Windows Explorer, Command Prompt, and PowerShell, RunBash offers a versatile and efficient way to execute Bash scripts and Binarys without the need for a separate terminal.
 
 ## Table of Contents
  - [Features](#features)
