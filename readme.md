@@ -24,7 +24,7 @@
 - **Root/Admin Access:** Optionally run scripts with Root or Admin privileges.
 - **Error and Output Handling:** Fine-tune what outputs and errors are displayed or hidden.
 > [!NOTE]
-> The Batchfile Can Not Run on it's Own it needs the main exe ahead of it   
+> The Batchfile Can Not Run on it's Own it needs the main exe ahead of it  
 
 ## Getting Started
 ### Prerequisites
@@ -32,7 +32,7 @@
   - Quick install : `wsl --install && shutdown /r` optional : `wsl --set-default-version 2` if supported !
 
 ### Installation
- 1. Clone the Repository `Git Clone https://github.com/benzaria/RunBash.git`  
+ 1. Clone the Repository `Git Clone https://github.com/benzaria/RunBash.git` and build.  
 or  
  2. Download the Latest Release [RunBash v1.3](https://github.com/benzaria/RunBash/archive/refs/tags/1.3.zip).  
 
